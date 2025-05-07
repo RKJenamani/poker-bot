@@ -6,7 +6,7 @@ pyproject.toml
 run_autoformat.sh
 run_ci_checks.sh
 src/poker_bot/__init__.py
-src/poker_bot/evaluator.py
+src/poker_bot/poker_llm.py
 src/poker_bot/py.typed
 src/poker_bot/structs.py
 src/poker_bot/utils.py
@@ -15,4 +15,6 @@ src/poker_bot.egg-info/SOURCES.txt
 src/poker_bot.egg-info/dependency_links.txt
 src/poker_bot.egg-info/requires.txt
 src/poker_bot.egg-info/top_level.txt
-tests/test_utils.py
+tests/test_poker_llm.py
+tests/test_poker_round_outcome.py
+tests/test_poker_round_state.py

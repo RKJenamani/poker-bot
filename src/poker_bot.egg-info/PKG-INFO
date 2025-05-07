@@ -8,6 +8,7 @@ License-File: LICENSE
 Requires-Dist: matplotlib
 Requires-Dist: numpy
 Requires-Dist: treys
+Requires-Dist: tomsutils@ git+https://github.com/tomsilver/toms-utils.git
 Provides-Extra: develop
 Requires-Dist: black; extra == "develop"
 Requires-Dist: docformatter; extra == "develop"

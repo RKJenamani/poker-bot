@@ -12,6 +12,7 @@ dependencies = [
    "matplotlib",
    "numpy",
    "treys",
+   "tomsutils@git+https://github.com/tomsilver/toms-utils.git",
 ]
 
 [project.optional-dependencies]

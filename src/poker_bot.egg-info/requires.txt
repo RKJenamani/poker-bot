@@ -1,6 +1,7 @@
 matplotlib
 numpy
 treys
+tomsutils@ git+https://github.com/tomsilver/toms-utils.git
 
 [develop]
 black
