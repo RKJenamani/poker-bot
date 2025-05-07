@@ -43,25 +43,34 @@ class PokerDataset(Dataset):
         y = torch.tensor([sample[self.target_key]], dtype=torch.float32)
         return X, y
 
-# Define the MLP model with regularization
 class PokerMLP(nn.Module):
-    def __init__(self, dropout_rate=0.2):
+    def __init__(self, dropout_rate=0.15):
         super(PokerMLP, self).__init__()
         self.model = nn.Sequential(
             nn.Linear(102, 512),
+            nn.BatchNorm1d(512),
             nn.ReLU(),
             nn.Dropout(dropout_rate),
             nn.Linear(512, 256),
+            nn.BatchNorm1d(256),
             nn.ReLU(),
             nn.Dropout(dropout_rate),
             nn.Linear(256, 128),
+            nn.BatchNorm1d(128),
             nn.ReLU(),
             nn.Dropout(dropout_rate),
             nn.Linear(128, 64),
+            nn.BatchNorm1d(64),
             nn.ReLU(),
             nn.Dropout(dropout_rate),
-            nn.Linear(64, 1)
+            nn.Linear(64, 1),
+            nn.Sigmoid()  # Constrain output to [0, 1]
         )
+        # Use Kaiming initialization (good for ReLU activations)
+        for layer in self.model:
+            if isinstance(layer, nn.Linear):
+                nn.init.kaiming_normal_(layer.weight)
+                nn.init.zeros_(layer.bias)
 
     def forward(self, x):
         return self.model(x)
@@ -71,3 +80,21 @@ def load_model(model_path):
     model.load_state_dict(torch.load(model_path, map_location=torch.device("cpu")))
     model.eval()
     return model
+
+class BoundedMaxErrorLoss(nn.Module):
+    def __init__(self, alpha=0.95, delta=1.0):
+        super(BoundedMaxErrorLoss, self).__init__()
+        self.alpha = alpha
+        self.delta = delta
+        self.huber_loss = nn.HuberLoss(delta=delta)
+
+    def forward(self, predictions, targets):
+        # Regular huber loss for general fit
+        base_loss = self.huber_loss(predictions, targets)
+
+        # Max error within bounds
+        bounded_errors = torch.clamp(predictions - targets, min=-1.0, max=1.0)
+        max_error = bounded_errors.abs().max()
+
+        # Combine the two losses
+        return self.alpha * max_error + (1 - self.alpha) * base_loss

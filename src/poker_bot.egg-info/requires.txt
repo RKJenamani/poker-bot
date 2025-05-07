@@ -3,6 +3,8 @@ numpy
 treys
 tomsutils@ git+https://github.com/tomsilver/toms-utils.git
 tqdm
+torch
+scikit-learn
 
 [develop]
 black
