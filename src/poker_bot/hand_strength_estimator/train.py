@@ -42,16 +42,20 @@ X_test = torch.stack(X_test).to(device)
 y_test = torch.stack(y_test).to(device)
 
 # Initialize the model, optimizer, and loss function
-model = PokerMLP(dropout_rate=0.0).to(device)
+model = PokerMLP(dropout_rate=0.15).to(device)
 optimizer = optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-5)
-scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.001, total_steps=100 * (X_train.size(0) // 32768), pct_start=0.1, anneal_strategy='linear', final_div_factor=10)
+scheduler = optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=10, T_mult=2, eta_min=1e-5)
 criterion = BoundedMaxErrorLoss(alpha=0.95, delta=1.0).to(device)
 
 # Training loop
 epochs = 1000
-batch_size = 131072
+batch_size = 8192
 
 for epoch in range(epochs):
+
+    if epoch > 500:
+        criterion.alpha = 0.99
+
     # Shuffle training data
     indices = torch.randperm(X_train.size(0), device=device)
     total_train_loss = 0
@@ -67,6 +71,7 @@ for epoch in range(epochs):
         predictions = model(X_batch)
         loss = criterion(predictions, y_batch)
         loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
         
         total_train_loss += loss.item()
@@ -75,7 +80,6 @@ for epoch in range(epochs):
         all_train_errors.append(abs(y_batch - predictions).max().item())
 
     avg_train_loss = total_train_loss / (X_train.size(0) // batch_size)
-    avg_train_error = np.mean(all_train_errors)
     max_train_error = max(all_train_errors)
 
     # Validation phase
