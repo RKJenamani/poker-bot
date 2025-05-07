@@ -1,0 +1,109 @@
+### Game Rules ###
+
+This is a two-player card game between you (the robot) and a human opponent, designed for rapid rounds and real-time adaptation to human behavior. The basic rules are as follows:
+
+- Each player starts with 3 chips and is dealt two private cards.
+- Five public cards are available, four face-up and one face-down on the table.
+
+### Game Phases ###
+
+1. Entry Cost: Each round requires one chip to enter.  
+2. Opponent’s Turn: The human opponent acts first, choosing one of two actions:  
+   - Fold: The opponent exits the round, and you win the two chips on the table.  
+   - All-In: The opponent commits all chips, signaling a strong hand or a potential bluff.  
+3. Your Turn: After observing the opponent’s action and non-verbal behavior, you choose one of two actions:  
+   - Fold: You exit, conceding the two chips to the opponent.  
+   - All-In: You commit all your chips.  
+
+4. Showdown: If both players go all-in, the player with the stronger 7-card hand (two private cards + five public cards) wins the pot.  
+
+5. Cards Reveal: At the end of each round, all seven cards (two private cards for each player + five public cards) are revealed, regardless of whether the round ended in a fold or all-in. This consistent reveal allows for continuous learning of the relationship between non-verbal cues and actual card strength.  
+
+---
+
+### Round History ###
+
+Private Cards: [A♣] [K♦]
+Visible Public Cards: [Q♣] [J♦] [T♦] [9♠]
+Opponent Chips: 5
+Own Chips: 5
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0
+Opponent Private Cards: [2♥] [3♦]
+Hidden Public Card: [8♦]
+Opponent All-In: True
+Robot All-In: True
+Would Robot Win (Given Cards): True
+Did Robot Win (Actual Outcome): True
+
+---
+Private Cards: [2♠] [3♣]
+Visible Public Cards: [4♥] [5♠] [6♦] [7♣]
+Opponent Chips: 5
+Own Chips: 5
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0
+Opponent Private Cards: [8♥] [9♦]
+Hidden Public Card: [T♦]
+Opponent All-In: True
+Robot All-In: True
+Would Robot Win (Given Cards): False
+Did Robot Win (Actual Outcome): False
+
+---
+Private Cards: [4♣] [5♦]
+Visible Public Cards: [6♥] [7♠] [8♣] [9♥]
+Opponent Chips: 4
+Own Chips: 6
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0
+Opponent Private Cards: [T♥] [J♦]
+Hidden Public Card: [Q♦]
+Opponent All-In: True
+Robot All-In: True
+Would Robot Win (Given Cards): False
+Did Robot Win (Actual Outcome): False
+
+---
+Private Cards: [6♣] [7♦]
+Visible Public Cards: [8♥] [9♠] [T♠] [J♠]
+Opponent Chips: 7
+Own Chips: 3
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0
+Opponent Private Cards: [Q♣] [K♦]
+Hidden Public Card: [A♥]
+Opponent All-In: True
+Robot All-In: False
+Would Robot Win (Given Cards): False
+Did Robot Win (Actual Outcome): False
+
+---
+
+### Current Round Context ###
+
+Estimated Hand Strength: 0.7252  
+Current State:  
+Private Cards: [A♠] [K♠]
+Visible Public Cards: [Q♦] [J♥] [T♠] [9♣]
+Opponent Chips: 5
+Own Chips: 5
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0  
+
+---
+
+### Task ###
+
+1. Non-Verbal Summary: Generate a brief summary describing the relationship between the opponent's non-verbal behaviors and their gameplay from prior rounds.  
+2. Action Recommendation: Should the robot go all in or fold based on the current hand strength and observed non-verbal behaviors? Respond with either **true** (go all-in) or **false** (fold).  
+3. Reasoning: Provide a concise explanation for the recommended action in (2), considering both hand strength and non-verbal cues.  
+
+---
+
+### Response Format ###
+
+Return your response as a Python dictionary in the following format:
+
+```python
+{
+   "non_verbal_summary": "string",         # Brief summary of non-verbal behaviors
+   "go_all_in": true or false,             # Boolean decision (true for all-in, false for fold)
+   "reasoning": "string"                   # Short explanation for the decision
+}
+```

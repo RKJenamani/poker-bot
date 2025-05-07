@@ -1,0 +1,7 @@
+```python
+{
+   "non_verbal_summary": "The opponent consistently exhibits the same non-verbal behaviors across rounds, with a high gaze at cards and frequent blinks, regardless of their hand strength. This suggests a potential bluffing pattern or a lack of correlation between their non-verbal cues and actual hand strength.",
+   "go_all_in": true,
+   "reasoning": "The robot's estimated hand strength is 0.8188, indicating a very strong hand with a potential straight. The opponent's non-verbal cues have not shown a reliable correlation with their hand strength, as they exhibit the same behaviors regardless of their cards. Given the strong hand and the lack of reliable non-verbal indicators, going all-in is a strategic decision."
+}
+```

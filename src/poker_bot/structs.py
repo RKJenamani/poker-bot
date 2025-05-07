@@ -1,9 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List
+from pathlib import Path
 from treys import Card, Deck, Evaluator
 import itertools
+import torch
+
+from poker_bot.hand_strength_estimator.model import PokerMLP, load_model, independent_one_hot_encode
 
 evaluator = Evaluator()
+hand_strength_model = load_model(Path(__file__).parent / "hand_strength_estimator" / "models" / "poker_mlp.pth")
+hand_strength_model.eval()
 
 @dataclass(frozen=True)
 class NonVerbalBehavior:
@@ -63,6 +69,21 @@ class PokerRoundState:
                 total += 1
         
         return (wins + 0.5 * ties) / total
+    
+    def hand_strength_approx(self) -> float:
+        """Compute the approximate win probability using a neural network."""
+        # Prepare the input for the model
+        input_data = independent_one_hot_encode(self.private_cards + self.visible_public_cards)
+        input_tensor = torch.tensor(input_data, dtype=torch.float32).unsqueeze(0)
+        
+        # Forward pass through the model
+        with torch.no_grad():
+            output = hand_strength_model(input_tensor)
+        
+        # Extract the win probability
+        win_prob = output.item()
+        
+        return win_prob
 
     def __str__(self):
         private = " ".join([Card.int_to_pretty_str(c) for c in self.private_cards])

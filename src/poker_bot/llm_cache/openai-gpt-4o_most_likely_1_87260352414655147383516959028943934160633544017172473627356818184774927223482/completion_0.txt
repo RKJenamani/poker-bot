@@ -1,0 +1,7 @@
+```python
+{
+   "non_verbal_summary": "The opponent consistently exhibits a high level of gaze at cards (60%) and a moderate level of gaze at the robot (15%), with frequent gaze shifts (8/s) and blinks (12/s). These behaviors have been consistent across rounds, regardless of their hand strength, suggesting a potential bluffing strategy or a lack of correlation between non-verbal cues and actual hand strength.",
+   "go_all_in": true,
+   "reasoning": "The robot's current hand strength is high (0.7252), with a strong potential for a straight or high pair given the private cards [A♠] [K♠] and the visible public cards [Q♦] [J♥] [T♠] [9♣]. The opponent's non-verbal cues have not shown a reliable correlation with hand strength in previous rounds, and their consistent all-in behavior suggests a possible bluff. Therefore, going all-in is a reasonable decision given the strong hand and the opponent's potential bluffing strategy."
+}
+```

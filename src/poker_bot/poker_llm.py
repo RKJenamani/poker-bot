@@ -33,6 +33,7 @@ class PokerLLM:
         prompt = self.prompt_skeleton % (
             history_str.strip(),
             f"{current_round.hand_strength():.4f}",
+            # f"{current_round.hand_strength_approx():.4f}", # Uncomment if using approximate strength estimated using a neural network
             str(current_round).strip()
         )
         return prompt
