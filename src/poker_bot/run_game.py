@@ -163,5 +163,5 @@ def run_game(nonverbal_data_path: Path):
             break
 
 if __name__ == "__main__":
-    nonverbal_data_path = Path("data/nonverbal_behavior.json")
+    nonverbal_data_path = Path("../poker-bot-perception/data/nonverbal_behavior.json")
     run_game(nonverbal_data_path) 
