@@ -9,7 +9,7 @@ from poker_bot.structs import PokerRoundState, NonVerbalBehavior
 # Define the output file
 output_file = "data/poker_hand_exact_strength_5M.pkl"
 num_workers = 16
-sample_size = 5000000
+sample_size = 1000000
 
 # Create a fresh deck
 deck = Deck()

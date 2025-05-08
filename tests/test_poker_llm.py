@@ -21,7 +21,7 @@ class TestPokerLLM(unittest.TestCase):
         # Create a current round state
         self.current_round = PokerRoundState(
             private_cards=[Card.new('As'), Card.new('Ks')],
-            visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts'), Card.new('9c')],
+            visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts')],
             opponent_chips=5,
             own_chips=5,
             non_verbal_behavior=self.non_verbal_behavior
@@ -31,9 +31,9 @@ class TestPokerLLM(unittest.TestCase):
         self.round_history = [
             PokerRoundOutcome(
                 private_cards=[Card.new('Ac'), Card.new('Kd')],
-                visible_public_cards=[Card.new('Qc'), Card.new('Jd'), Card.new('Td'), Card.new('9s')],
+                visible_public_cards=[Card.new('Qc'), Card.new('Jd'), Card.new('Td')],
                 opponent_private_cards=[Card.new('2h'), Card.new('3d')],
-                hidden_public_card=Card.new('8d'),
+                hidden_public_cards=[Card.new('8d'), Card.new('9c')],
                 opponent_chips=5,
                 own_chips=5,
                 non_verbal_behavior=self.non_verbal_behavior,
@@ -44,41 +44,41 @@ class TestPokerLLM(unittest.TestCase):
             ),
             PokerRoundOutcome(
                 private_cards=[Card.new('2s'), Card.new('3c')],
-                visible_public_cards=[Card.new('4h'), Card.new('5s'), Card.new('6d'), Card.new('7c')],
+                visible_public_cards=[Card.new('4h'), Card.new('5s'), Card.new('6d')],
                 opponent_private_cards=[Card.new('8h'), Card.new('9d')],
-                hidden_public_card=Card.new('Td'),
+                hidden_public_cards=[Card.new('Td'), Card.new('Jc')],
                 opponent_chips=5,
                 own_chips=5,
                 non_verbal_behavior=self.non_verbal_behavior,
                 opponent_all_in=True,
                 robot_all_in=True,
-                would_robot_win=False,
-                did_robot_win=False
+                would_robot_win=True,
+                did_robot_win=True
             ),
             PokerRoundOutcome(
                 private_cards=[Card.new('4c'), Card.new('5d')],
-                visible_public_cards=[Card.new('6h'), Card.new('7s'), Card.new('8c'), Card.new('9h')],
+                visible_public_cards=[Card.new('6h'), Card.new('7s'), Card.new('8c')],
                 opponent_private_cards=[Card.new('Th'), Card.new('Jd')],
-                hidden_public_card=Card.new('Qd'),
+                hidden_public_cards=[Card.new('Qd'), Card.new('Kd')],
                 opponent_chips=4,
                 own_chips=6,
                 non_verbal_behavior=self.non_verbal_behavior,
                 opponent_all_in=True,
                 robot_all_in=True,
-                would_robot_win=False,
-                did_robot_win=False
+                would_robot_win=True,
+                did_robot_win=True
             ),
             PokerRoundOutcome(
                 private_cards=[Card.new('6c'), Card.new('7d')],
-                visible_public_cards=[Card.new('8h'), Card.new('9s'), Card.new('Ts'), Card.new('Js')],
+                visible_public_cards=[Card.new('8h'), Card.new('9s'), Card.new('Ts')],
                 opponent_private_cards=[Card.new('Qc'), Card.new('Kd')],
-                hidden_public_card=Card.new('Ah'),
+                hidden_public_cards=[Card.new('Ah'), Card.new('2d')],
                 opponent_chips=7,
                 own_chips=3,
                 non_verbal_behavior=self.non_verbal_behavior,
                 opponent_all_in=True,
                 robot_all_in=False,
-                would_robot_win=False,
+                would_robot_win=True,
                 did_robot_win=False
             )
         ]

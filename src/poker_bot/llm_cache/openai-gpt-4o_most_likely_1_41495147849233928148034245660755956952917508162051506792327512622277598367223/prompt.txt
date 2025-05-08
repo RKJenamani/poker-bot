@@ -23,15 +23,68 @@ This is a two-player card game between you (the robot) and a human opponent, des
 
 ### Round History ###
 
-%s
+Private Cards: [A♣] [K♦]
+Visible Public Cards: [Q♣] [J♦] [T♦]
+Opponent Chips: 5
+Own Chips: 5
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0
+Opponent Private Cards: [2♥] [3♦]
+Hidden Public Card: [8♦] [9♣]
+Opponent All-In: True
+Robot All-In: True
+Would Robot Win (Given Cards): True
+Did Robot Win (Actual Outcome): True
+
+---
+Private Cards: [2♠] [3♣]
+Visible Public Cards: [4♥] [5♠] [6♦]
+Opponent Chips: 5
+Own Chips: 5
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0
+Opponent Private Cards: [8♥] [9♦]
+Hidden Public Card: [T♦] [J♣]
+Opponent All-In: True
+Robot All-In: True
+Would Robot Win (Given Cards): True
+Did Robot Win (Actual Outcome): True
+
+---
+Private Cards: [4♣] [5♦]
+Visible Public Cards: [6♥] [7♠] [8♣]
+Opponent Chips: 4
+Own Chips: 6
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0
+Opponent Private Cards: [T♥] [J♦]
+Hidden Public Card: [Q♦] [K♦]
+Opponent All-In: True
+Robot All-In: True
+Would Robot Win (Given Cards): True
+Did Robot Win (Actual Outcome): True
+
+---
+Private Cards: [6♣] [7♦]
+Visible Public Cards: [8♥] [9♠] [T♠]
+Opponent Chips: 7
+Own Chips: 3
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0
+Opponent Private Cards: [Q♣] [K♦]
+Hidden Public Card: [A♥] [2♦]
+Opponent All-In: True
+Robot All-In: False
+Would Robot Win (Given Cards): True
+Did Robot Win (Actual Outcome): False
 
 ---
 
 ### Current Round Context ###
 
-Estimated Hand Strength: %s  
+Estimated Hand Strength: 0.9549  
 Current State:  
-%s  
+Private Cards: [A♠] [K♠]
+Visible Public Cards: [Q♦] [J♥] [T♠]
+Opponent Chips: 5
+Own Chips: 5
+Non-Verbal Behavior: Gaze at Cards (%): 60.0, Gaze at Robot (%): 15.0, Gaze Shifts (/s): 8.0, Mean Fixation Duration (s): 0.50, Head Pose Shifts (/s): 5.0, Blinks (/s): 12.0  
 
 ---
 

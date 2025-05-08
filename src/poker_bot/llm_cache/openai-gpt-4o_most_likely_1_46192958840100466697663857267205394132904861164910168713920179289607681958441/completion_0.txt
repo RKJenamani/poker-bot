@@ -1,0 +1,7 @@
+```python
+{
+   "non_verbal_summary": "The opponent consistently exhibits a high level of gaze at cards (60%) and moderate gaze at the robot (15%), with frequent gaze shifts (8/s) and blinks (12/s). These behaviors suggest a pattern of focus and potential anxiety, possibly indicating uncertainty or bluffing when going all-in.",
+   "go_all_in": true,
+   "reasoning": "The robot's estimated hand strength is very high at 0.9549, indicating a strong likelihood of winning. The opponent's non-verbal cues, such as frequent gaze shifts and blinks, may suggest bluffing or uncertainty. Given the strong hand and the potential for the opponent's bluff, going all-in is a strategic decision."
+}
+```

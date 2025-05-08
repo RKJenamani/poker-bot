@@ -18,9 +18,9 @@ class TestPokerRoundOutcome(unittest.TestCase):
         # Robot should win in this all-in scenario
         outcome = PokerRoundOutcome(
             private_cards=[Card.new('As'), Card.new('Ks')],
-            visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts'), Card.new('9c')],
+            visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts')],
             opponent_private_cards=[Card.new('2h'), Card.new('3d')],
-            hidden_public_card=Card.new('8d'),
+            hidden_public_cards=[Card.new('8d'), Card.new('9c')],
             opponent_chips=5,
             own_chips=5,
             non_verbal_behavior=self.non_verbal_behavior,
@@ -34,9 +34,9 @@ class TestPokerRoundOutcome(unittest.TestCase):
         # Robot should lose in this all-in scenario
         outcome = PokerRoundOutcome(
             private_cards=[Card.new('2h'), Card.new('3d')],
-            visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts'), Card.new('9c')],
+            visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts')],
             opponent_private_cards=[Card.new('As'), Card.new('Ks')],
-            hidden_public_card=Card.new('8d'),
+            hidden_public_cards=[Card.new('8d'), Card.new('9c')],
             opponent_chips=5,
             own_chips=5,
             non_verbal_behavior=self.non_verbal_behavior,
@@ -50,9 +50,9 @@ class TestPokerRoundOutcome(unittest.TestCase):
         # Opponent folded, so robot wins by default
         outcome = PokerRoundOutcome(
             private_cards=[Card.new('As'), Card.new('Ks')],
-            visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts'), Card.new('9c')],
+            visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts')],
             opponent_private_cards=[Card.new('2h'), Card.new('3d')],
-            hidden_public_card=Card.new('8d'),
+            hidden_public_cards=[Card.new('8d'), Card.new('9c')],
             opponent_chips=0,
             own_chips=10,
             non_verbal_behavior=self.non_verbal_behavior,
@@ -67,9 +67,9 @@ class TestPokerRoundOutcome(unittest.TestCase):
         with self.assertRaises(ValueError):
             PokerRoundOutcome(
                 private_cards=[Card.new('As'), Card.new('Ks')],
-                visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts'), Card.new('9c')],
+                visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts')],
                 opponent_private_cards=[Card.new('2h'), Card.new('3d')],
-                hidden_public_card=Card.new('8d'),
+                hidden_public_cards=[Card.new('8d'), Card.new('9c')],
                 opponent_chips=10,
                 own_chips=0,
                 non_verbal_behavior=self.non_verbal_behavior,
@@ -84,9 +84,9 @@ class TestPokerRoundOutcome(unittest.TestCase):
         with self.assertRaises(AssertionError):
             PokerRoundOutcome(
                 private_cards=[Card.new('As'), Card.new('Ks')],
-                visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts'), Card.new('9c')],
+                visible_public_cards=[Card.new('Qd'), Card.new('Jh'), Card.new('Ts')],
                 opponent_private_cards=[Card.new('2h'), Card.new('3d')],
-                hidden_public_card=Card.new('8d'),
+                hidden_public_cards=[Card.new('8d'), Card.new('9c')],
                 opponent_chips=4,
                 own_chips=5,
                 non_verbal_behavior=self.non_verbal_behavior,

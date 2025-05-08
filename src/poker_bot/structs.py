@@ -56,10 +56,10 @@ class PokerRoundState:
         wins, ties, total = 0, 0, 0
         
         # Iterate over all possible combinations of 1 hidden public card
-        for hidden_card in deck.cards:
-            full_board = self.visible_public_cards + [hidden_card]
+        for hidden_combo in itertools.combinations(deck.cards, 2):
+            full_board = self.visible_public_cards + list(hidden_combo)
             my_best = evaluator.evaluate(self.private_cards, full_board)
-            remaining_deck = [c for c in deck.cards if c != hidden_card]
+            remaining_deck = [c for c in deck.cards if c not in hidden_combo]
 
             for opp_combo in itertools.combinations(remaining_deck, 2):
                 opp_best = evaluator.evaluate(list(opp_combo), full_board)
@@ -101,7 +101,7 @@ class PokerRoundState:
 @dataclass(frozen=True)
 class PokerRoundOutcome(PokerRoundState):
     opponent_private_cards: List[int]
-    hidden_public_card: int
+    hidden_public_cards: List[int]
     opponent_all_in: bool
     robot_all_in: bool
     would_robot_win: bool
@@ -111,7 +111,7 @@ class PokerRoundOutcome(PokerRoundState):
         super().__post_init__()
 
         # Compute the correct would_robot_win value
-        all_public_cards = self.visible_public_cards + [self.hidden_public_card]
+        all_public_cards = self.visible_public_cards + self.hidden_public_cards
         robot_best = evaluator.evaluate(self.private_cards, all_public_cards)
         opponent_best = evaluator.evaluate(self.opponent_private_cards, all_public_cards)
         computed_would_robot_win = robot_best < opponent_best
@@ -128,7 +128,7 @@ class PokerRoundOutcome(PokerRoundState):
         # Use the parent class string as the base
         base_str = super().__str__()
         opponent_private = " ".join([Card.int_to_pretty_str(c) for c in self.opponent_private_cards])
-        hidden_public = Card.int_to_pretty_str(self.hidden_public_card)
+        hidden_public = " ".join([Card.int_to_pretty_str(c) for c in self.hidden_public_cards])
         
         return (
             f"{base_str.strip()}\n"

@@ -17,16 +17,16 @@ class TestPokerRoundState(unittest.TestCase):
 
         # Test cases with known private and public cards
         self.test_cases = [
-            ([Card.new('2s'), Card.new('3d')], [Card.new('4h'), Card.new('5c'), Card.new('6d'), Card.new('7s')]),
-            ([Card.new('7c'), Card.new('8d')], [Card.new('9h'), Card.new('Ts'), Card.new('Js'), Card.new('Qs')]),
-            ([Card.new('9c'), Card.new('Tc')], [Card.new('2h'), Card.new('3s'), Card.new('4d'), Card.new('5h')]),
-            ([Card.new('2h'), Card.new('2d')], [Card.new('3c'), Card.new('4s'), Card.new('5d'), Card.new('6h')]),
-            ([Card.new('3d'), Card.new('4s')], [Card.new('5h'), Card.new('6c'), Card.new('7d'), Card.new('8s')]),
-            ([Card.new('4c'), Card.new('5d')], [Card.new('6s'), Card.new('7h'), Card.new('8d'), Card.new('9s')]),
-            ([Card.new('5d'), Card.new('6s')], [Card.new('7h'), Card.new('8c'), Card.new('9d'), Card.new('Ts')]),
-            ([Card.new('6c'), Card.new('7h')], [Card.new('8d'), Card.new('9s'), Card.new('Ts'), Card.new('Js')]),
-            ([Card.new('7d'), Card.new('8s')], [Card.new('9h'), Card.new('Ts'), Card.new('Js'), Card.new('Qs')]),
-            ([Card.new('8c'), Card.new('9d')], [Card.new('Ts'), Card.new('Js'), Card.new('Qs'), Card.new('Ks')])
+            ([Card.new('2s'), Card.new('3d')], [Card.new('4h'), Card.new('5c'), Card.new('6d')]),
+            ([Card.new('7c'), Card.new('8d')], [Card.new('9h'), Card.new('Ts'), Card.new('Js')]),
+            ([Card.new('9c'), Card.new('Tc')], [Card.new('2h'), Card.new('3s'), Card.new('4d')]),
+            ([Card.new('2h'), Card.new('2d')], [Card.new('3c'), Card.new('4s'), Card.new('5d')]),
+            ([Card.new('3d'), Card.new('4s')], [Card.new('5h'), Card.new('6c'), Card.new('7d')]),
+            ([Card.new('4c'), Card.new('5d')], [Card.new('6s'), Card.new('7h'), Card.new('8d')]),
+            ([Card.new('5d'), Card.new('6s')], [Card.new('7h'), Card.new('8c'), Card.new('9d')]),
+            ([Card.new('6c'), Card.new('7h')], [Card.new('8d'), Card.new('9s'), Card.new('Ts')]),
+            ([Card.new('7d'), Card.new('8s')], [Card.new('9h'), Card.new('Ts'), Card.new('Js')]),
+            ([Card.new('8c'), Card.new('9d')], [Card.new('Ts'), Card.new('Js'), Card.new('Qs')])
         ]
 
     def test_hand_strength_computation(self):
