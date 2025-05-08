@@ -17,11 +17,14 @@ class PokerLLM:
 
     def get_decision(self, current_round: PokerRoundState, round_history: List[PokerRoundOutcome]) -> dict:
         # Format the current prompt
+        print("Formatting context...")
         prompt = self.format_context(current_round, round_history)
+        print("Context formatted.")
 
         # Generate a decision using the LLM
+        print("Generating decision...")
         response = self.llm.sample_completions(prompt, imgs=None, temperature=0.0, seed=0)[0][0]
-
+        print("Decision generated.")
         # Parse the response into a Python dictionary
         return self.parse_response(response)
 

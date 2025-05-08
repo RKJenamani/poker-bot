@@ -41,8 +41,8 @@ class PokerRoundState:
 
     def __post_init__(self):
         # Ensure valid chip distribution
-        assert self.opponent_chips + self.own_chips == 10, \
-            f"Total number of chips must be 10, got {self.opponent_chips + self.own_chips}"
+        assert self.opponent_chips + self.own_chips == 6, \
+            f"Total number of chips must be 6, got {self.opponent_chips + self.own_chips}"
 
     def hand_strength(self) -> float:
         """Compute the exact win probability for the current hand."""
