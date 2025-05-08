@@ -6,7 +6,7 @@ from treys import Card, Deck
 from poker_bot.structs import PokerRoundState, NonVerbalBehavior
 
 # Define the output file
-output_file = "data/poker_hand_exact_strength_25000.pkl"
+output_file = "data/easier_poker_hand_exact_strength_25000.pkl"
 num_samples = 25000
 num_workers = cpu_count()
 
@@ -19,8 +19,8 @@ def compute_hand_strength(_):
     # Draw two private cards for the robot
     private_cards = [deck.draw(1)[0], deck.draw(1)[0]]
 
-    # Draw four visible public cards
-    visible_public_cards = [deck.draw(1)[0] for _ in range(4)]
+    # Draw two visible public cards
+    visible_public_cards = [deck.draw(1)[0] for _ in range(2)]
 
     # Use a placeholder non-verbal behavior (not relevant for hand strength)
     non_verbal_behavior = NonVerbalBehavior(

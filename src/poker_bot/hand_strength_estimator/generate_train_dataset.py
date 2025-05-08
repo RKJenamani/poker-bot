@@ -7,8 +7,8 @@ from treys import Card, Deck
 from poker_bot.structs import PokerRoundState, NonVerbalBehavior, evaluator
 
 # Define the input and output files
-train_file = "data/poker_hand_estimated_strength_1M.pkl"
-test_file = "data/poker_hand_exact_strength_25000.pkl"
+train_file = "data/easier_poker_hand_estimated_strength_1M.pkl"
+test_file = "data/easier_poker_hand_exact_strength_25000.pkl"
 num_samples = 1000000  # Number of samples to generate
 batch_size = 100  # Number of opponent samples per batch
 convergence_threshold = 0.01
@@ -36,8 +36,8 @@ def compute_hand_strength(_):
         # Draw 2 private cards
         private_cards = sorted([deck.draw(1)[0], deck.draw(1)[0]])
 
-        # Draw 4 visible public cards
-        visible_public_cards = sorted([deck.draw(1)[0] for _ in range(4)])
+        # Draw 2 visible public cards
+        visible_public_cards = sorted([deck.draw(1)[0] for _ in range(2)])
 
         # Check if this combination already exists in the test set
         key = (tuple(private_cards), tuple(visible_public_cards))

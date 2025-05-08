@@ -8,8 +8,9 @@ import torch
 from poker_bot.hand_strength_estimator.model import PokerMLP, load_model, independent_one_hot_encode
 
 evaluator = Evaluator()
-hand_strength_model = load_model(Path(__file__).parent / "hand_strength_estimator" / "models" / "poker_mlp.pth")
-hand_strength_model.eval()
+hand_strength_model = PokerMLP()
+# hand_strength_model = load_model(Path(__file__).parent / "hand_strength_estimator" / "models" / "poker_mlp.pth")
+# hand_strength_model.eval()
 
 @dataclass(frozen=True)
 class NonVerbalBehavior:

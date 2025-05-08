@@ -10,8 +10,8 @@ from tqdm import tqdm
 from model import PokerMLP, PokerDataset, BoundedMaxErrorLoss
 
 # Paths to data files
-train_file = "data/poker_hand_estimated_strength_1M_0.pkl"
-test_file = "data/poker_hand_exact_strength_25000.pkl"
+train_file = "data/easier_poker_hand_estimated_strength_1M.pkl"
+test_file = "data/easier_poker_hand_exact_strength_25000.pkl"
 model_save_path = "models/poker_mlp.pth"
 
 # Check for CUDA
