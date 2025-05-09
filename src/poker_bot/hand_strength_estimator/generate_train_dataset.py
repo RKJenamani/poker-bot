@@ -1,3 +1,4 @@
+import os
 import random
 import pickle
 import numpy as np
@@ -7,7 +8,6 @@ from treys import Card, Deck
 from poker_bot.structs import PokerRoundState, NonVerbalBehavior, evaluator
 
 # Define the input and output files
-train_file = "data/poker_hand_estimated_strength_1M.pkl"
 test_file = "data/poker_hand_exact_strength_25000.pkl"
 num_samples = 1000000  # Number of samples to generate
 batch_size = 100  # Number of opponent samples per batch
@@ -25,7 +25,12 @@ test_pairs = set(
 
 print(f"Loaded {len(test_pairs)} existing test samples.")
 
-# Function to compute hand strength with incremental convergence
+# Function to set a unique seed for each worker
+def init_worker(seed_offset):
+    seed = os.getpid() + seed_offset
+    random.seed(seed)
+    np.random.seed(seed)
+
 # Function to compute hand strength with incremental convergence
 def compute_hand_strength(_):
     while True:
@@ -94,21 +99,30 @@ def compute_hand_strength(_):
 
 if __name__ == "__main__":
     print("Generating poker hand strength training dataset with incremental convergence...")
-    with Pool(num_workers) as pool:
-        # Use tqdm for a progress bar
-        data = list(tqdm(pool.imap(compute_hand_strength, range(num_samples)), total=num_samples))
 
-    # Save the dataset to a pickle file
-    with open(train_file, "wb") as f:
-        pickle.dump(data, f)
+    for i in range(25):
+        print(f"Iteration {i + 1} of 25...")
+        train_file = f"data/poker_hand_estimated_strength_1M_{i}.pkl"
 
-    # Calculate statistics for the total samples
-    sample_counts = [d["total_samples"] for d in data]
-    max_samples = max(sample_counts)
-    avg_samples = np.mean(sample_counts)
-    std_dev_samples = np.std(sample_counts)
+        # Use a different seed offset for each run to ensure different shuffles
+        with Pool(num_workers, initializer=init_worker, initargs=(i * 1000,)) as pool:
+            # Use tqdm for a progress bar
+            data = list(tqdm(pool.imap(compute_hand_strength, range(num_samples)), total=num_samples))
 
-    print(f"\nDataset saved to {train_file}")
-    print(f"Max Samples for a Datapoint: {max_samples}")
-    print(f"Average Samples per Datapoint: {avg_samples:.2f}")
-    print(f"Standard Deviation of Samples: {std_dev_samples:.2f}")
+        # Save the dataset to a pickle file
+        with open(train_file, "wb") as f:
+            pickle.dump(data, f)
+
+        # Calculate statistics for the total samples
+        sample_counts = [d["total_samples"] for d in data]
+        max_samples = max(sample_counts)
+        avg_samples = np.mean(sample_counts)
+        std_dev_samples = np.std(sample_counts)
+
+        print(f"\nDataset saved to {train_file}")
+        print(f"Max Samples for a Datapoint: {max_samples}")
+        print(f"Average Samples per Datapoint: {avg_samples:.2f}")
+        print(f"Standard Deviation of Samples: {std_dev_samples:.2f}")
+
+        # delete the data variable to free up memory
+        del data

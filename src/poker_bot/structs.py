@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List
 from pathlib import Path
+import random
 from treys import Card, Deck, Evaluator
 import itertools
 import torch
@@ -70,6 +71,50 @@ class PokerRoundState:
                 total += 1
         
         return (wins + 0.5 * ties) / total
+    
+    def hand_strength_monte_carlo(self, convergence_threshold = 0.001) -> float:
+
+        known_cards = set(self.private_cards + self.visible_public_cards)
+        remaining_cards = [c for c in Deck().cards if c not in known_cards]
+
+        # Incrementally estimate hand strength until convergence
+        batch_size = 1000
+        # Initialize variables
+        total_samples = 0
+        wins = 0
+        ties = 0
+        prev_win_rate = -1  # Set to an invalid initial value
+
+        while True:
+            # Sample batches of opponent hands + hidden card (with replacement)
+            for _ in range(batch_size):
+                other_cards = random.sample(remaining_cards, 4)
+                hidden_cards = other_cards[:2]
+                opponent_private_cards = other_cards[2:]
+                
+                # Compare hands directly
+                full_board = self.visible_public_cards + hidden_cards
+                my_best = evaluator.evaluate(self.private_cards, full_board)
+                opp_best = evaluator.evaluate(opponent_private_cards, full_board)
+
+                if my_best < opp_best:
+                    wins += 1
+                elif my_best == opp_best:
+                    ties += 1
+
+                total_samples += 1
+            
+            # Calculate the current win rate including ties
+            current_win_rate = (wins + 0.5 * ties) / total_samples
+            
+            # Check for convergence
+            if prev_win_rate != -1 and abs(current_win_rate - prev_win_rate) < convergence_threshold:
+                break
+            
+            prev_win_rate = current_win_rate
+
+        # Return the final result
+        return current_win_rate
     
     def hand_strength_approx(self) -> float:
         """Compute the approximate win probability using a neural network."""
